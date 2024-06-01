@@ -42,7 +42,7 @@ exports.checkNotAcknowledged = function (res, callback) {
 
 exports.checkNotFound = function (res, callback) {
   if (res === null || !res || (!res && res?.matchedCount === 0)) {
-    callback({
+    return callback({
       code: grpc.status.NOT_FOUND,
       message: 'Document not found',
     });

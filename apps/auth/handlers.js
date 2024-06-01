@@ -14,27 +14,27 @@ function checkLoginReq(call, callback) {
   }
 }
 
-function authenticateUser(user, call, callback) {
-  if (user.password !== '123123') {
-    return callback({
-      code: grpc.status.PERMISSION_DENIED,
-      err: 'User not authorized',
-    });
-  }
-}
-
 exports.loginHandler = async (call, callback) => {
   await mongo_client.connect();
   const database = mongo_client.db('userdb');
   const Users = database.collection('user');
 
+  const payload = {
+    email: call.request.getEmail(),
+    password: call.request.getPassword(),
+  };
+  console.log({ payload });
   checkLoginReq(call, callback);
 
-  const res = await Users.findOne({ email: 'test@mock.com' });
-  checkNotFound(res, callback);
-  authenticateUser(res, call, callback);
+  const res = await Users.findOne({ ...payload });
 
-  console.log({ res });
+  if (res == null || !res || (res && res?.matchedCount === 0)) {
+    return callback({
+      code: grpc.status.NOT_FOUND,
+      message: 'Document not found',
+    });
+  }
+
   await mongo_client.close();
   const authUser = new LoginResponse().setUser(
     documentToBlog(res, 'secret_token')

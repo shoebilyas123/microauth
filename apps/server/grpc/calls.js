@@ -5,9 +5,8 @@ exports.login = async ({ email, password }) =>
   new Promise((resolve, reject) => {
     const login_req = new LoginRequest().setEmail(email).setPassword(password);
     let result = {};
-    console.log(login_req);
     client.login(login_req, (err, res) => {
-      if (err) reject(err);
+      if (err || !res) return reject(err);
       const user = res.getUser();
       result = {
         username: user.getUsername(),

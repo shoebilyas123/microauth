@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -13,11 +13,12 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-// import { AppDispatch } from '@/state/store';
-import instance from '@/api/axios';
+import { AppDispatch } from '@/state/store';
+import { login } from '@/state/auth/slice';
+import axios from 'axios';
 
 export function LoginComponent() {
-  // const dispatch = useDispatch<AppDispatch>();
+  const dispatch = useDispatch<AppDispatch>();
   const [email, setEmail] = React.useState<string>('');
   const [password, setPassword] = React.useState<string>('');
 
@@ -25,8 +26,11 @@ export function LoginComponent() {
     try {
       const payload = { email, password };
 
-      const res = await instance.post('/auth/login', payload);
-      console.log(res);
+      const res = await axios.post(
+        'http://localhost:8080/api/v1/auth/login',
+        payload
+      );
+      dispatch(login(res.data));
     } catch (err) {
       console.log(err);
     }
