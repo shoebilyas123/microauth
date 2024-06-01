@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "client": "pnpm --filter client",
-    "server": "pnpm --filter server"
+    "server": "pnpm --filter server",
+    "auth": "pnpm --filter auth"
   },
   "keywords": [],
   "author": "",

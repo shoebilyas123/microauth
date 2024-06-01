@@ -1,0 +1,22 @@
+{
+  "name": "auth",
+  "private": true,
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "pb:gen": "./node_modules/.bin/grpc_tools_node_protoc -I ./protos/ --js_out=import_style=commonjs:./protos/ --grpc_out=grpc_js:./protos/ ./protos/auth.proto",
+    "dev": "nodemon index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "grpc-tools": "^1.12.4"
+  },
+  "dependencies": {
+    "@grpc/grpc-js": "^1.10.8",
+    "google-protobuf": "^3.21.2",
+    "mongodb": "^6.7.0"
+  }
+}
