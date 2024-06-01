@@ -1,6 +1,6 @@
 # Microsevices Auth
 ## Introduction
-  This project is a demo auth application that is centred around Microsevices and efficient gRPC communication.
+  This project is a demo auth application that is centred around Microsevices and efficient gRPC communication. The codebase is a monorepo.
 
 ## Architecture 
    This is a brief breakdown of the architecture. Each service is a module in apps folder for your reference.
