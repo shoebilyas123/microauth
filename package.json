@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "client": "pnpm --filter client"
+    "client": "pnpm --filter client",
+    "server": "pnpm --filter server"
   },
   "keywords": [],
   "author": "",
