@@ -24,12 +24,14 @@ export function Help() {
           <AlertDialogHeader>
             <AlertDialogTitle>Login Credentials!</AlertDialogTitle>
             <AlertDialogDescription>
-              <p>
-                Email: <b>test@micro.com</b>
-              </p>
-              <p>
-                Password: <b>123123</b>
-              </p>
+              <span className="flex flex-col">
+                <span>
+                  Email: <b>test@micro.com</b>
+                </span>
+                <span>
+                  Password: <b>123123</b>
+                </span>
+              </span>
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>

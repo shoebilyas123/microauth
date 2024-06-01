@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { ChangeEvent } from 'react';
+// import { useDispatch } from 'react-redux';
 
 import { Button } from '@/components/ui/button';
 import {
@@ -12,7 +13,25 @@ import {
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
+// import { AppDispatch } from '@/state/store';
+import instance from '@/api/axios';
+
 export function LoginComponent() {
+  // const dispatch = useDispatch<AppDispatch>();
+  const [email, setEmail] = React.useState<string>('');
+  const [password, setPassword] = React.useState<string>('');
+
+  const loginHandler = async () => {
+    try {
+      const payload = { email, password };
+
+      const res = await instance.post('/auth/login', payload);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <Card className="w-[350px]">
       <CardHeader>
@@ -28,6 +47,10 @@ export function LoginComponent() {
                 id="email-login"
                 placeholder="Enter your email..."
                 type="email"
+                value={email}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setEmail(e.target.value)
+                }
               />
             </div>
             <div className="flex flex-col space-y-1.5">
@@ -36,6 +59,10 @@ export function LoginComponent() {
                 id="password-login"
                 placeholder="Enter your password..."
                 type="password"
+                value={password}
+                onChange={(e: ChangeEvent<HTMLInputElement>) =>
+                  setPassword(e.target.value)
+                }
               />
             </div>
           </div>
@@ -43,7 +70,7 @@ export function LoginComponent() {
       </CardContent>
       <CardFooter className="flex justify-between">
         <Button variant="outline">Register</Button>
-        <Button>Login</Button>
+        <Button onClick={loginHandler}>Login</Button>
       </CardFooter>
     </Card>
   );
