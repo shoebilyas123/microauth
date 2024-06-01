@@ -10,6 +10,7 @@ exports.login = async ({ email, password }) => {
       return new Error('something went wrong');
     }
 
+    console.log(res);
     return res.getUser();
   });
 };

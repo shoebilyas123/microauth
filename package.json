@@ -6,7 +6,8 @@
   "scripts": {
     "client": "pnpm --filter client",
     "server": "pnpm --filter server",
-    "auth": "pnpm --filter auth"
+    "auth": "pnpm --filter auth",
+    "db": "cd apps/database; docker-compose up; cd../.."
   },
   "keywords": [],
   "author": "",

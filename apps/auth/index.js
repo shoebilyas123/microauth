@@ -37,7 +37,7 @@ function main() {
   });
 
   server.addService(AuthServiceService, {
-    login: handlers.login,
+    login: handlers.loginHandler,
   });
 
   server.bindAsync(SERVER_ADDR, serverCreds, (err, _) => {

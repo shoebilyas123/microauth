@@ -119,11 +119,12 @@ proto.User.prototype.toObject = function(opt_includeInstance) {
  */
 proto.User.toObject = function(includeInstance, msg) {
   var f, obj = {
-    username: jspb.Message.getFieldWithDefault(msg, 1, ""),
-    email: jspb.Message.getFieldWithDefault(msg, 2, ""),
-    profilepic: jspb.Message.getFieldWithDefault(msg, 3, ""),
-    accesstoken: jspb.Message.getFieldWithDefault(msg, 4, ""),
-    password: jspb.Message.getFieldWithDefault(msg, 5, "")
+    id: jspb.Message.getFieldWithDefault(msg, 1, ""),
+    username: jspb.Message.getFieldWithDefault(msg, 2, ""),
+    email: jspb.Message.getFieldWithDefault(msg, 3, ""),
+    profilepic: jspb.Message.getFieldWithDefault(msg, 4, ""),
+    accesstoken: jspb.Message.getFieldWithDefault(msg, 5, ""),
+    password: jspb.Message.getFieldWithDefault(msg, 6, "")
   };
 
   if (includeInstance) {
@@ -162,21 +163,25 @@ proto.User.deserializeBinaryFromReader = function(msg, reader) {
     switch (field) {
     case 1:
       var value = /** @type {string} */ (reader.readString());
-      msg.setUsername(value);
+      msg.setId(value);
       break;
     case 2:
       var value = /** @type {string} */ (reader.readString());
-      msg.setEmail(value);
+      msg.setUsername(value);
       break;
     case 3:
       var value = /** @type {string} */ (reader.readString());
-      msg.setProfilepic(value);
+      msg.setEmail(value);
       break;
     case 4:
       var value = /** @type {string} */ (reader.readString());
-      msg.setAccesstoken(value);
+      msg.setProfilepic(value);
       break;
     case 5:
+      var value = /** @type {string} */ (reader.readString());
+      msg.setAccesstoken(value);
+      break;
+    case 6:
       var value = /** @type {string} */ (reader.readString());
       msg.setPassword(value);
       break;
@@ -209,38 +214,45 @@ proto.User.prototype.serializeBinary = function() {
  */
 proto.User.serializeBinaryToWriter = function(message, writer) {
   var f = undefined;
-  f = message.getUsername();
+  f = message.getId();
   if (f.length > 0) {
     writer.writeString(
       1,
       f
     );
   }
-  f = message.getEmail();
+  f = message.getUsername();
   if (f.length > 0) {
     writer.writeString(
       2,
       f
     );
   }
-  f = message.getProfilepic();
+  f = message.getEmail();
   if (f.length > 0) {
     writer.writeString(
       3,
       f
     );
   }
-  f = message.getAccesstoken();
+  f = message.getProfilepic();
   if (f.length > 0) {
     writer.writeString(
       4,
       f
     );
   }
-  f = message.getPassword();
+  f = message.getAccesstoken();
   if (f.length > 0) {
     writer.writeString(
       5,
+      f
+    );
+  }
+  f = message.getPassword();
+  if (f.length > 0) {
+    writer.writeString(
+      6,
       f
     );
   }
@@ -248,10 +260,10 @@ proto.User.serializeBinaryToWriter = function(message, writer) {
 
 
 /**
- * optional string username = 1;
+ * optional string id = 1;
  * @return {string}
  */
-proto.User.prototype.getUsername = function() {
+proto.User.prototype.getId = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 1, ""));
 };
 
@@ -260,16 +272,16 @@ proto.User.prototype.getUsername = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setUsername = function(value) {
+proto.User.prototype.setId = function(value) {
   return jspb.Message.setProto3StringField(this, 1, value);
 };
 
 
 /**
- * optional string email = 2;
+ * optional string username = 2;
  * @return {string}
  */
-proto.User.prototype.getEmail = function() {
+proto.User.prototype.getUsername = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 2, ""));
 };
 
@@ -278,16 +290,16 @@ proto.User.prototype.getEmail = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setEmail = function(value) {
+proto.User.prototype.setUsername = function(value) {
   return jspb.Message.setProto3StringField(this, 2, value);
 };
 
 
 /**
- * optional string profilePic = 3;
+ * optional string email = 3;
  * @return {string}
  */
-proto.User.prototype.getProfilepic = function() {
+proto.User.prototype.getEmail = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 3, ""));
 };
 
@@ -296,16 +308,16 @@ proto.User.prototype.getProfilepic = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setProfilepic = function(value) {
+proto.User.prototype.setEmail = function(value) {
   return jspb.Message.setProto3StringField(this, 3, value);
 };
 
 
 /**
- * optional string accessToken = 4;
+ * optional string profilePic = 4;
  * @return {string}
  */
-proto.User.prototype.getAccesstoken = function() {
+proto.User.prototype.getProfilepic = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 4, ""));
 };
 
@@ -314,16 +326,16 @@ proto.User.prototype.getAccesstoken = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setAccesstoken = function(value) {
+proto.User.prototype.setProfilepic = function(value) {
   return jspb.Message.setProto3StringField(this, 4, value);
 };
 
 
 /**
- * optional string password = 5;
+ * optional string accessToken = 5;
  * @return {string}
  */
-proto.User.prototype.getPassword = function() {
+proto.User.prototype.getAccesstoken = function() {
   return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 5, ""));
 };
 
@@ -332,8 +344,26 @@ proto.User.prototype.getPassword = function() {
  * @param {string} value
  * @return {!proto.User} returns this
  */
-proto.User.prototype.setPassword = function(value) {
+proto.User.prototype.setAccesstoken = function(value) {
   return jspb.Message.setProto3StringField(this, 5, value);
+};
+
+
+/**
+ * optional string password = 6;
+ * @return {string}
+ */
+proto.User.prototype.getPassword = function() {
+  return /** @type {string} */ (jspb.Message.getFieldWithDefault(this, 6, ""));
+};
+
+
+/**
+ * @param {string} value
+ * @return {!proto.User} returns this
+ */
+proto.User.prototype.setPassword = function(value) {
+  return jspb.Message.setProto3StringField(this, 6, value);
 };
 
 
