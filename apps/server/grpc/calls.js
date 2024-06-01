@@ -1,16 +1,21 @@
 const { LoginRequest } = require('../protos/auth_pb');
 const client = require('./client');
 
-exports.login = async ({ email, password }) => {
-  const login_req = new LoginRequest().setEmail(email).setPassword(password);
-
-  await client.login(login_req, (err, res) => {
-    if (err) {
-      console.log(err);
-      return new Error('something went wrong');
-    }
-
-    console.log(res);
-    return res.getUser();
+exports.login = async ({ email, password }) =>
+  new Promise((resolve, reject) => {
+    const login_req = new LoginRequest().setEmail(email).setPassword(password);
+    let result = {};
+    console.log(login_req);
+    client.login(login_req, (err, res) => {
+      if (err) reject(err);
+      const user = res.getUser();
+      result = {
+        username: user.getUsername(),
+        email: user.getEmail(),
+        profilePic: user.getProfilepic(),
+        accessToken: user.getAccesstoken(),
+        id: user.getId(),
+      };
+      resolve(result);
+    });
   });
-};

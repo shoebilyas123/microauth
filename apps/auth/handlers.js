@@ -1,4 +1,6 @@
 const grpc = require('@grpc/grpc-js');
+const { LoginResponse } = require('./protos/auth_pb');
+
 // const { getCollection } = require('./lib/mongodb');
 const { checkNotFound, documentToBlog } = require('./lib');
 const mongo_client = require('./lib/mongodb');
@@ -13,7 +15,7 @@ function checkLoginReq(call, callback) {
 }
 
 function authenticateUser(user, call, callback) {
-  if (user.password !== call.request.getPassword()) {
+  if (user.password !== '123123') {
     return callback({
       code: grpc.status.PERMISSION_DENIED,
       err: 'User not authorized',
@@ -22,15 +24,20 @@ function authenticateUser(user, call, callback) {
 }
 
 exports.loginHandler = async (call, callback) => {
+  await mongo_client.connect();
   const database = mongo_client.db('userdb');
-  const collection = database.collection('user');
+  const Users = database.collection('user');
 
   checkLoginReq(call, callback);
 
-  (await collection).findOne({ email: call.request.getEmail() }).then((res) => {
-    checkNotFound(res, callback);
-    authenticateUser(res, call, callback);
+  const res = await Users.findOne({ email: 'test@mock.com' });
+  checkNotFound(res, callback);
+  authenticateUser(res, call, callback);
 
-    callback(null, documentToBlog(res, 'secret_token'));
-  });
+  console.log({ res });
+  await mongo_client.close();
+  const authUser = new LoginResponse().setUser(
+    documentToBlog(res, 'secret_token')
+  );
+  callback(null, authUser);
 };

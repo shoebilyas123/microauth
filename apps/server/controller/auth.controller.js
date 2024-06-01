@@ -1,12 +1,12 @@
 const { login } = require('../grpc/calls');
 
-exports.login = async (req, res) => {
+exports.apiLogin = async (req, res) => {
   try {
     const { email, password } = req.body;
-    const res = await login({ email, password });
-    console.log(res);
-    res.status(200).send('LOGIN');
+    const result = await login({ email, password });
+    res.status(200).json(result);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ message: 'internal server error' });
   }
 };
