@@ -1,8 +1,19 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+
+import { Button } from '@/components/ui/button';
+import { logout } from '@/state/auth/slice';
+import { AppDispatch } from '@/state/store';
 
 const Home = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
+
+  const logoutHandler = () => {
+    dispatch(logout());
+  };
+
   return (
     <div className="flex flex-col items-center justify-center">
       <h1>Home</h1>
@@ -20,6 +31,10 @@ const Home = () => {
           Home
         </p>
       </div>
+
+      <Button variant={'outline'} onClick={logoutHandler}>
+        Logout
+      </Button>
     </div>
   );
 };
