@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Auth from '@/components/organisms/auth';
 
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
