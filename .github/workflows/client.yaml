@@ -35,7 +35,7 @@ jobs:
           version: 8
       - name: Install dependencies
         working-directory: ./apps/client
-        run: pnpm ci
+        run: pnpm install
       - name: Build
         working-directory: ./apps/client
         run: pnpm run build
