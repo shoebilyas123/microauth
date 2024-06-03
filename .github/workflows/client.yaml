@@ -23,9 +23,6 @@ concurrency:
 jobs:
   # Single deploy job since we're just deploying
   deploy:
-    defaults:
-      run:
-        working-directory: ./apps/client
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
@@ -42,8 +39,10 @@ jobs:
         with:
           version: 8
       - name: Install dependencies
+        working-directory: ./apps/client
         run: pnpm ci
       - name: Build
+        working-directory: ./apps/client
         run: pnpm run build
       - name: Setup Pages
         uses: actions/configure-pages@v4
@@ -51,7 +50,7 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload dist folder
-          path: './dist'
+          path: './apps/client/dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
